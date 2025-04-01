@@ -112,4 +112,12 @@ class User extends Authenticatable
     {
         return $this->answers()->count();
     }
+
+    public function viewedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_views')
+            ->withPivot('viewed_at')
+            ->orderBy('post_views.viewed_at', 'desc')
+            ->limit(5);
+    }
 }

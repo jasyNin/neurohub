@@ -6,19 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('post_views', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->timestamp('viewed_at');
             $table->timestamps();
+
+            $table->unique(['user_id', 'post_id']);
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('post_views');
     }
-}; 
+};

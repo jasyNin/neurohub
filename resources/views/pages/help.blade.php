@@ -3,9 +3,14 @@
 @section('title', 'Помощь')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 80px;">
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <!-- Боковое меню -->
+        <x-side-menu />
+        @include('components.side-menu-styles')
+
+        <!-- Основной контент -->
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
                     <h2 class="mb-0">Помощь</h2>

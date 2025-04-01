@@ -3,7 +3,7 @@
 @section('title', 'Создать пост')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 80px;">
     <div class="row">
         <!-- Боковое меню -->
         <x-side-menu />
@@ -16,9 +16,8 @@
                     <h5 class="mb-0">Создать пост</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('posts.store') }}" method="POST">
+                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
                         <div class="mb-3">
                             <label for="title" class="form-label">Заголовок</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
@@ -55,9 +54,17 @@
                             <div class="form-text">Например: php, laravel, javascript</div>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Изображение</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('home') }}" class="btn btn-outline-secondary">Отмена</a>
-                            <button type="submit" class="btn btn-primary">Опубликовать</button>
+                            <a href="{{ route('home') }}" class="btn btn-secondary">Отмена</a>
+                            <button type="submit" class="btn btn-primary">Создать</button>
                         </div>
                     </form>
                 </div>

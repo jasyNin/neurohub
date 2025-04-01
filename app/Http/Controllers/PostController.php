@@ -106,6 +106,11 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        // Отмечаем просмотр
+        if (auth()->check()) {
+            $post->markAsViewed(auth()->user());
+        }
+
         $post->increment('views_count');
         
         // Получаем популярные теги

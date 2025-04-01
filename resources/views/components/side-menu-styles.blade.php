@@ -5,9 +5,9 @@
     top: 0;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 40px);
     padding-left: 0;
-    margin-top: 80px;
+    /* margin-top: 50px; */
 }
 
 .menu-section {
@@ -28,7 +28,7 @@
 }
 
 .menu-item.active {
-    background-color: #F0F0F0;
+    background-color: white;
 }
 
 .menu-item a {
@@ -37,18 +37,21 @@
     font-weight: 500;
 }
 
-.menu-item svg {
-    color: #272727;
+.menu-item img {
     opacity: 0.8;
 }
 
-.menu-item:hover svg {
+.menu-item:hover img {
     opacity: 1;
+}
+
+.menu-item.active img {
+    filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(1035%) hue-rotate(210deg) brightness(97%) contrast(101%);
 }
 
 .menu-section:last-child {
     margin-top: auto;
-    padding-top: 24px;
+    padding-top: 12px;
     border-top: 1px solid #F0F0F0;
 }
 </style>

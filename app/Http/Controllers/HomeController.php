@@ -12,7 +12,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $query = Post::with(['user', 'tags'])
-            ->latest();
+            ->withCount(['answers', 'comments'])
+            ->orderBy('created_at', 'desc');
 
         if ($request->has('type')) {
             $query->where('type', $request->type);
@@ -25,17 +26,15 @@ class HomeController extends Controller
         }
 
         $posts = $query->paginate(10);
-
+        $viewedPosts = auth()->check() ? auth()->user()->viewedPosts : collect();
+        
         $popularTags = Tag::withCount('posts')
             ->orderBy('posts_count', 'desc')
-            ->take(10)
+            ->get();
+            
+        $topUsers = User::orderBy('rating', 'desc')
             ->get();
 
-        $topUsers = User::withCount(['posts', 'comments', 'answers'])
-            ->orderBy('posts_count', 'desc')
-            ->take(5)
-            ->get();
-
-        return view('home', compact('posts', 'popularTags', 'topUsers'));
+        return view('home', compact('posts', 'viewedPosts', 'popularTags', 'topUsers'));
     }
 } 

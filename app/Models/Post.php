@@ -94,4 +94,22 @@ class Post extends Model
     {
         return $this->answers()->count();
     }
+
+    public function views()
+    {
+        return $this->hasMany(PostView::class);
+    }
+
+    public function viewedBy(User $user)
+    {
+        return $this->views()->where('user_id', $user->id)->exists();
+    }
+
+    public function markAsViewed(User $user)
+    {
+        $this->views()->updateOrCreate(
+            ['user_id' => $user->id],
+            ['viewed_at' => now()]
+        );
+    }
 }

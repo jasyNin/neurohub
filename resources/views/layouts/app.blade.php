@@ -16,7 +16,7 @@
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="height: 60px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top" style="height: 60px;">
         <div class="container">
             <a class="navbar-brand text" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="НейроХаб" height="32" class="me-2">
